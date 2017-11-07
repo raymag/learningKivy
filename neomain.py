@@ -4,14 +4,9 @@ from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.popup import Popup
 import random
 
-class end(App):
-    def build(self):
-        return Button(text=str('deu ruim, score: '+ str(won)),
-                      font_size='95sp',
-                     color = [0, 255, 0, 1], on_press=exit)
-    
 class Program(GridLayout): #Program usa o GridLayout como base
     
     def __init__(self, **kwargs): #Kwargs é uma lista passada como parâmetros
@@ -19,17 +14,37 @@ class Program(GridLayout): #Program usa o GridLayout como base
         global won #Definindo as variáveis como global
         global lost
         won, lost = 0, 0
-        def choose(cup):
+        def newGame(arg): #Reseta e atualiza o Score para um novo jogo
             global won
             global lost
-            coin = random.randint(1,2)
-            if lost > 9:
-                end().run()
-                exit()
-            if coin == 1:
+            won, lost = 0, 0
+            wonPoints.text = str(won)
+            lostPoints.text = str(lost)
+            ending = (arg.parent).parent.parent #Eding é o PopUp criado em cada GameOver
+            ending.parent.dismiss() 
+        def choose(cup): #É executada a cada escolha entre Copo da Direita e Esquerda
+            global won
+            global lost
+            coin = random.randint(1,2)#Um número aleatório é escolhido
+            if lost > 9: #Caso os erros alcancem 10, GameOver
+                ending = BoxLayout(orientation='vertical') #Layout criado para o PopUp
+                GameOver = Label(text=str('deu ruim, score: '+ str(won)),
+                      font_size='85sp',
+                     color = [2, 255,2, 1])
+                again = Button(text='Continuar?', on_press=newGame) #Invoca a função NewGame quando executada
+                notAgain = Button(text='Sair?', on_press=exit)
+
+                ending.add_widget(GameOver) #Adiciona os widgets ao PopUp Ending
+                ending.add_widget(again)
+                ending.add_widget(notAgain)
+                end = Popup(title='End',
+                            content=ending,
+                            size=(400, 400)).open()
+            #Atualiza o placar
+            if coin == 1:  
                 cups.text = 'Estava na esquerda!'
                 if cup.text == 'Copo da Esquerda':
-                    won += 1
+                    won += 1 
                     wonPoints.text = str(won)
                 else:
                     lost += 1
