@@ -11,11 +11,12 @@ class end(App):
         return Button(text=str('deu ruim, score: '+ str(won)),
                       font_size='95sp',
                      color = [0, 255, 0, 1], on_press=exit)
-class Program(GridLayout):
     
-    def __init__(self, **kwargs):
+class Program(GridLayout): #Program usa o GridLayout como base
+    
+    def __init__(self, **kwargs): #Kwargs é uma lista passada como parâmetros
         super(Program, self).__init__(**kwargs)
-        global won
+        global won #Definindo as variáveis como global
         global lost
         won, lost = 0, 0
         def choose(cup):
@@ -47,14 +48,18 @@ class Program(GridLayout):
 Existe uma moeda escondida, um
 copo na direita e outro na esquerda, em qual
 deles reside a moeda?
-''')
+''', font_size='30sp')
         score = BoxLayout()
-        wonLabel = Label(text='Acertos:')
-        lostLabel = Label(text='Erros:')
-        wonPoints = Label(text=str(won))
-        lostPoints = Label(text=str(lost))
-        cupL = Button(text='Copo da Esquerda', on_press=choose)
-        cupR = Button(text='Copo da Direita', on_press=choose)
+        wonLabel = Label(text='Acertos:', font_size='40sp')
+        lostLabel = Label(text='Erros:', font_size='40sp')
+        wonPoints = Label(text=str(won), font_size='45sp')
+        lostPoints = Label(text=str(lost), font_size='45sp')
+        cupL = Button(text='Copo da Esquerda',
+                      on_press=choose,
+                      font_size='35sp')
+        cupR = Button(text='Copo da Direita',
+                      on_press=choose,
+                      font_size='35sp')
         box = GridLayout()
         box.cols = 2
         
@@ -71,8 +76,8 @@ deles reside a moeda?
     
         
 
-class App(App):
-    def build(self):
+class App(App): #Classe base do programa
+    def build(self): #Inicializa a janela e chama a classe Program
         return Program()
 
 App().run()
