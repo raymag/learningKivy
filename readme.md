@@ -1,3 +1,3 @@
-#learningKivy
+# learningKivy
 
-Repositório com o único propósito de manter arquivos e treinos pessoais do Kivy.
+RepositÃ³rio com o Ãºnico propÃ³sito de manter arquivos e treinos pessoais do Kivy.
