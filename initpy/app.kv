@@ -1,0 +1,17 @@
+<initpy>:
+    orientation: "vertical"
+    BoxLayout:
+        id: menu
+        Button:
+            id: add
+            text: "Adicionar"
+            on_release: root.add()
+            background_color: 3, 1, 1, 1
+        Button:
+            id: remove
+            text: "Remover"
+            on_release: root.remove()
+            background_color: 3, 1, 1, 1
+    GridLayout:
+        id: ProgramGrid
+        cols: 3
