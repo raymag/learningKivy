@@ -1,0 +1,24 @@
+<Forca>:
+    orientation: "vertical"
+    Label:
+        id: screen
+        text: "F-O-R-C-A"
+        font_size: 65
+    GridLayout:
+        cols: 2
+        Label:
+            id: tentadas
+            text: "____"
+            font_size: 45
+        Label:
+            id: vidas
+            text: "5"
+            font_size: 50
+    BoxLayout:
+        orientation: "vertical"
+        TextInput:
+            font_size: 40
+        Button:
+            text: "Tentar"
+            on_release: root.tryGuest()
+            font_size: 45
